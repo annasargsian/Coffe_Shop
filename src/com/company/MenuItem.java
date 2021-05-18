@@ -49,4 +49,13 @@ public class MenuItem {
 
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "nameOfItem='" + nameOfItem + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

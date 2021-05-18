@@ -5,7 +5,7 @@ public class CoffeeShop {
     private MenuItem[] orders = new MenuItem[100];
     private MenuItem[] menu = new MenuItem[100];
     private int currentElementOfOrders = 0;
-    private int currentPriceOfOrder = 0;
+    private double currentPriceOfOrder = 0;
 
     public String addOrder(MenuItem order) {
 
@@ -43,26 +43,27 @@ public class CoffeeShop {
 
                 }
             }
-            return "Ok";
+            return "Everything is good";
         }
     }
 
-    public String[] listOfders(MenuItem[] orders) {
-        int lengthOfArray = 0;
-        String[] listOfOrders = new String[lengthOfArray];
+    public String[] listOfOrders() {
+        String[] listOfOrders = new String[orders.length];
         if (currentElementOfOrders > 0) {
             for (int i = 0; i < orders.length; i++) {
+                if (orders[i] == null) {
+                    break;
+                }
                 listOfOrders[i] = orders[i].getNameOfItem();
-                lengthOfArray++;
             }
             return listOfOrders;
         } else {
-            return listOfOrders;
+            return new String[0];
         }
     }
 
-    public void dueAmount(int currentPriceOfOrder) {
-        System.out.println("The total amount due for the orders" + currentPriceOfOrder);
+    public void dueAmount() {
+        System.out.println("The total amount due for the orders " + currentPriceOfOrder);
     }
 
     public void cheapestItem(MenuItem[] orders) {
@@ -76,24 +77,26 @@ public class CoffeeShop {
     }
 
     public String[] drinksOnly(MenuItem[] orders) {
-        int lengthOfDrinksOnly = 0;
-        String[] drinksOnly = new String[lengthOfDrinksOnly];
-        for (int i = 0; i < orders.length; i++) {
-            if (orders[i].getType().equals("drink")) {
-                drinksOnly[i] = orders[i].getNameOfItem();
-                lengthOfDrinksOnly++;
-            }
-        }
-        return drinksOnly;
+        return foodOrDrinkOnly(orders, "drink");
     }
 
     public String[] foodOnly(MenuItem[] orders) {
-        int lengthOfFoodOnly = 0;
-        String[] foodOnly = new String[lengthOfFoodOnly];
+        return foodOrDrinkOnly(orders, "food");
+    }
+
+    public String[] foodOrDrinkOnly(MenuItem[] orders, String type) {
+        int countFood = 0;
         for (int i = 0; i < orders.length; i++) {
-            if (orders[i].getType().equals("food")) {
-                foodOnly[i] = orders[i].getNameOfItem();
-                lengthOfFoodOnly++;
+            if (orders[i].getType().equals(type)) {
+                countFood++;
+            }
+        }
+        String[] foodOnly = new String[countFood];
+        int position = 0;
+        for (int i = 0; i < orders.length; i++) {
+            if (orders[i].getType().equals(type)) {
+                foodOnly[position] = orders[i].getNameOfItem();
+                position++;
             }
         }
         return foodOnly;
@@ -122,4 +125,5 @@ public class CoffeeShop {
     public void setMenu(MenuItem[] menu) {
         this.menu = menu;
     }
+
 }
