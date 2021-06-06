@@ -77,14 +77,14 @@ public class CoffeeShop {
     }
 
     public String[] drinksOnly(MenuItem[] orders) {
-        return foodOrDrinkOnly(orders, "drink");
+        return checkIsDrinkOrFood(orders, "drink");
     }
 
     public String[] foodOnly(MenuItem[] orders) {
-        return foodOrDrinkOnly(orders, "food");
+        return checkIsDrinkOrFood(orders, "food");
     }
 
-    public String[] foodOrDrinkOnly(MenuItem[] orders, String type) {
+    public String[] checkIsDrinkOrFood(MenuItem[] orders, String type) {
         int countFood = 0;
         for (int i = 0; i < orders.length; i++) {
             if (orders[i].getType().equals(type)) {
